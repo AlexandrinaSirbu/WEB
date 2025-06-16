@@ -1,185 +1,593 @@
- /* /public/css/styles.css */
+/* PIG - Programs Input Generator Styles */
+/* Făcut cu drag pentru proiectul nostru 💻 */
 
 :root {
-  --primary: #df7d90;
-  --secondary: #f0f0f0;
-  --background: #fff0f5;
-  --text: #333333;
-  --border: #dddddd;
-  --success: #28a745;
-  --danger: #dc3545;
-  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Paleta de culori - inspirată din culorile naturale */
+  --primary-color: #e85a73;
+  --primary-hover: #d44864;
+  --secondary-bg: #f8f9fa;
+  --main-bg: #ffffff;
+  --content-bg: #fefbfc;
+  --text-dark: #2c3e50;
+  --text-medium: #5a6c7d;
+  --border-light: #e1e8ed;
+  --border-medium: #cbd5db;
+  --success-green: #27ae60;
+  --error-red: #e74c3c;
+  --warning-orange: #f39c12;
+  
+  /* Fonturi - mai prietenoase cu ochiul */
+  --font-primary: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  
+  /* Spațieri consistente */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  
+  /* Border radius pentru consistență */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  
+  /* Umbre subtile */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+}
+
+/* Reset și stiluri de bază */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-main);
-  background-color: var(--secondary);
-  color: var(--text);
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, var(--secondary-bg) 0%, #f1f3f4 100%);
+  color: var(--text-dark);
   margin: 0;
   padding: 0;
-  line-height: 1.6;
+  line-height: 1.65;
+  min-height: 100vh;
+  font-size: 16px;
 }
 
+/* Header cu gradient subtil */
 header {
-  background-color: var(--primary);
-  color: #fff;
-  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #d63384 100%);
+  color: white;
+  padding: var(--space-lg) var(--space-md);
   text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 header h1 {
+  margin: 0 0 var(--space-md) 0;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+header p {
   margin: 0;
-  font-size: 28px;
+  opacity: 0.9;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Navigație mai elegantă */
+nav {
+  margin-top: var(--space-md);
 }
 
 nav ul {
   list-style: none;
   padding: 0;
-  margin-top: 15px;
+  margin: 0;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
 }
 
 nav ul li a {
-  color: #fff;
+  color: white;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 nav ul li a:hover {
-  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
+/* Container principal */
 main {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: var(--background);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin: var(--space-xl) auto;
+  padding: var(--space-lg);
+  background: var(--content-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+/* Stiluri pentru formulare - mai prietenoase */
+.form-section {
+  margin-bottom: var(--space-xl);
+}
+
+.form-section h2 {
+  color: var(--primary-color);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: var(--space-xs);
+  display: inline-block;
 }
 
 form label {
   display: block;
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 form input,
 form select,
 form textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  font-size: 14px;
-  box-sizing: border-box;
+  padding: var(--space-sm) var(--space-md);
+  margin-top: var(--space-xs);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: var(--main-bg);
 }
 
-form button {
-  margin-top: 15px;
-  background-color: var(--primary);
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(232, 90, 115, 0.1);
+  transform: translateY(-1px);
+}
+
+form input:hover,
+form select:hover,
+form textarea:hover {
+  border-color: var(--border-medium);
+}
+
+/* Butoane cu stil îmbunătățit */
+form button,
+.btn {
+  margin-top: var(--space-md);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
-form button:hover {
-  background-color: #db2d76;
+form button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, #c63d5a 100%);
 }
 
+form button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Zona de rezultate */
 #resultBox {
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid var(--border);
-  padding: 15px;
-  border-radius: 8px;
+  margin-top: var(--space-lg);
+  background: var(--main-bg);
+  border: 2px solid var(--border-light);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+#resultBox::before {
+  content: '📊 Rezultat';
+  position: absolute;
+  top: -12px;
+  left: var(--space-md);
+  background: var(--main-bg);
+  padding: 0 var(--space-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 pre, #result {
   white-space: pre-wrap;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 15px;
-  color: #000;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-dark);
+  background: #f8f9fa;
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--primary-color);
+  overflow-x: auto;
 }
 
+/* Footer */
 footer {
   text-align: center;
-  padding: 20px;
-  background-color: var(--primary);
-  color: #fff;
-  margin-top: 40px;
+  padding: var(--space-xxl) var(--space-md);
+  background: linear-gradient(135deg, var(--text-dark) 0%, #34495e 100%);
+  color: white;
+  margin-top: var(--space-xxl);
 }
 
+footer p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Tabele mai elegante */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: var(--space-md);
+  background: var(--main-bg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 table th,
 table td {
-  padding: 10px;
-  border: 1px solid var(--border);
+  padding: var(--space-md);
   text-align: left;
+  border-bottom: 1px solid var(--border-light);
 }
 
 table th {
-  background-color: var(--primary);
-  color: #fff;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 13px;
 }
 
+table tr:hover {
+  background: rgba(232, 90, 115, 0.05);
+}
+
+/* Link-uri */
 a {
-  color: var(--primary);
+  color: var(--primary-color);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
+/* Mesaje de stare */
 .error {
-  color: var(--danger);
-  font-weight: bold;
+  color: var(--error-red);
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(231, 76, 60, 0.1);
+  border-left: 4px solid var(--error-red);
+  border-radius: var(--radius-sm);
+  margin: var(--space-md) 0;
 }
 
 .success {
-  color: var(--success);
-  font-weight: bold;
+  color: var(--success-green);
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(39, 174, 96, 0.1);
+  border-left: 4px solid var(--success-green);
+  border-radius: var(--radius-sm);
+  margin: var(--space-md) 0;
 }
 
+.warning {
+  color: var(--warning-orange);
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(243, 156, 18, 0.1);
+  border-left: 4px solid var(--warning-orange);
+  border-radius: var(--radius-sm);
+  margin: var(--space-md) 0;
+}
+
+/* Checkbox-uri personalizate */
 .checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
 }
 
 .checkbox-option {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
-  border: 1px solid var(--border);
+  padding: var(--space-md);
+  background: var(--main-bg);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-light);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.checkbox-option:hover {
+  border-color: var(--primary-color);
+  background: rgba(232, 90, 115, 0.05);
+  transform: translateY(-1px);
 }
 
 .checkbox-option span {
   font-size: 15px;
-  font-weight: normal;
+  font-weight: 400;
+  color: var(--text-dark);
 }
 
 .checkbox-option input[type="checkbox"] {
-  width: auto !important; /* Previne aplicarea stilurilor de input generale */
+  width: auto !important;
   margin: 0;
-  transform: scale(1.2);
-  accent-color: var(--primary);
+  transform: scale(1.3);
+  accent-color: var(--primary-color);
   cursor: pointer;
+}
+
+/* Cards pentru organizarea conținutului */
+.card {
+  background: var(--main-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  margin-bottom: var(--space-md);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Grid pentru layout responsive */
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* TELEFON (până la 767px) */
+@media (max-width: 767px) {
+  :root {
+    --space-xs: 6px;
+    --space-sm: 10px;
+    --space-md: 14px;
+    --space-lg: 18px;
+    --space-xl: 24px;
+    --space-xxl: 32px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  header {
+    padding: var(--space-md);
+  }
+  
+  header h1 {
+    font-size: 24px;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  nav ul li a {
+    display: block;
+    text-align: center;
+    padding: var(--space-sm);
+  }
+  
+  main {
+    margin: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+  }
+  
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .checkbox-option {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  
+  table {
+    font-size: 13px;
+  }
+  
+  table th,
+  table td {
+    padding: var(--space-xs) var(--space-sm);
+  }
+  
+  form button,
+  .btn {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-md);
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* TABLETĂ (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  main {
+    max-width: 700px;
+    margin: var(--space-lg) var(--space-md);
+  }
+  
+  .checkbox-group {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  header h1 {
+    font-size: 28px;
+  }
+  
+  nav ul {
+    gap: var(--space-md);
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* LAPTOP/DESKTOP (1024px+) */
+@media (min-width: 1024px) {
+  main {
+    max-width: 1000px;
+  }
+  
+  .checkbox-group {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  header {
+    padding: var(--space-xl) var(--space-lg);
+  }
+  
+  header h1 {
+    font-size: 36px;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+/* Stiluri pentru SVG (grafuri) */
+.svg-container {
+  background: var(--main-bg);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.svg-container svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Loading spinner */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(232, 90, 115, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Utilități */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.mb-0 { margin-bottom: 0; }
+.mt-0 { margin-top: 0; }
+.hidden { display: none; }
+.visible { display: block; }
+
+/* Print styles */
+@media print {
+  header, footer, nav { display: none; }
+  main { 
+    max-width: none; 
+    margin: 0; 
+    box-shadow: none; 
+    border: none;
+  }
+  .no-print { display: none; }
 }
