@@ -1,45 +1,78 @@
 <?php include VIEW . '/components/header.php'; ?>
 
-<h2>Generator AJAX de Șiruri de caractere</h2>
+<div class="generator-container">
+    <h2>Generator de Șiruri de caractere</h2>
 
-<form id="generateForm">
-  <label>Lungime:</label>
-  <input type="number" name="length" value="10" min="1" required><br>
+    <form id="generateForm" class="string-generator-form">
+        <!-- Rândul de sus: 3 inputuri egale -->
+        <div class="top-row">
+            <div class="form-group">
+                <label for="length">Lungime</label>
+                <input
+                        type="number"
+                        id="length"
+                        name="length"
+                        class="form-control"
+                        value="10"
+                        min="1"
+                        required
+                >
+            </div>
 
-  <label>Opțiuni de caractere:</label>
-  <div class="checkbox-group">
-    <div class="checkbox-option">
-      <span>Include litere mici</span>
-      <input type="checkbox" name="lowercase" checked>
-    </div>
-    <div class="checkbox-option">
-      <span>Include litere mari</span>
-      <input type="checkbox" name="uppercase">
-    </div>
-    <div class="checkbox-option">
-      <span>Include cifre</span>
-      <input type="checkbox" name="digits">
-    </div>
-    <div class="checkbox-option">
-      <span>Include simboluri (!@#$%...)</span>
-      <input type="checkbox" name="symbols">
-    </div>
-  </div>
+            <div class="form-group">
+                <label for="prefix">Prefix (opțional)</label>
+                <input
+                        type="text"
+                        id="prefix"
+                        name="prefix"
+                        class="form-control"
+                >
+            </div>
 
-  <label>Prefix (opțional):</label>
-  <input type="text" name="prefix"><br>
+            <div class="form-group">
+                <label for="suffix">Sufix (opțional)</label>
+                <input
+                        type="text"
+                        id="suffix"
+                        name="suffix"
+                        class="form-control"
+                >
+            </div>
+        </div>
 
-  <label>Sufix (opțional):</label>
-  <input type="text" name="suffix"><br>
+        <!-- Rândul de jos: 4 checkbox + buton, toate cu aceeaşi lăţime -->
+        <div class="bottom-row">
+            <label class="checkbox-option">
+                <input type="checkbox" name="lowercase" checked>
+                Litere mici
+            </label>
+            <label class="checkbox-option">
+                <input type="checkbox" name="uppercase">
+                Litere mari
+            </label>
+            <label class="checkbox-option">
+                <input type="checkbox" name="digits">
+                Cifre
+            </label>
+            <label class="checkbox-option">
+                <input type="checkbox" name="symbols">
+                Simboluri (!@#$%…)
+            </label>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Generează
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 
-  <button type="submit">Generează</button>
-</form>
-
-<div id="resultBox" style="margin-top: 20px;">
-  <h3>Rezultat:</h3>
-  <div id="result" style="font-family: monospace;"></div>
+<div class="result-container">
+    <h3 class="result-title">Rezultat</h3>
+    <div id="result"
+         class="result-pre"
+         style="font-family: monospace;"></div>
 </div>
 
 <script src="/PIG/public/js/strings.js"></script>
-
 <?php include VIEW . '/components/footer.php'; ?>

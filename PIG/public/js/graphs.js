@@ -1,3 +1,4 @@
+//graphs.js
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#generateGraphForm");
   const resultDiv = document.querySelector("#graphResult");
@@ -30,63 +31,59 @@ document.addEventListener("DOMContentLoaded", () => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
-      .then((data) => {
-        const edges = data.edges;
-        if (!edges || !Array.isArray(edges)) {
-          resultDiv.textContent = "Eroare: răspuns invalid (edges lipsă sau invalid).";
-          return;
-        }
+        .then((res) => res.json())
+        .then((data) => {
+          const edges = data.edges;
+          if (!edges || !Array.isArray(edges)) {
+            resultDiv.textContent = "Eroare: răspuns invalid (edges lipsă sau invalid).";
+            return;
+          }
 
-        const muchii = edges.map(e => e.join(" ")).join("\n");
-        const matrice = data.adjacencyMatrix.map(row => row.join(" ")).join("\n");
-        const vectorTati = data.parentVector.join(" ");
+          const muchii = edges.map(e => e.join(" ")).join("\n");
+          const matrice = data.adjacencyMatrix.map(row => row.join(" ")).join("\n");
+          const vectorTati = data.parentVector.join(" ");
 
-        resultDiv.textContent =
-          "Este:" +
-          "\nConex: " + (data.isConnected ? "Da" : "Nu") +
-          "\nBipartit: " + (data.isBipartite ? "Da" : "Nu") +
-          "\nArbore: " + (data.isTree ? "Da" : "Nu") +
-          "\n\nMuchii:\n" + muchii +
-          "\n\nMatrice de adiacență:\n" + matrice +
-          "\n\nVectori de tați:\n" + vectorTati;
+          resultDiv.textContent =
+              "Este:" +
+              "\nConex: " + (data.isConnected ? "Da" : "Nu") +
+              "\nBipartit: " + (data.isBipartite ? "Da" : "Nu") +
+              "\nArbore: " + (data.isTree ? "Da" : "Nu") +
+              "\n\nMuchii:\n" + muchii +
+              "\n\nMatrice de adiacență:\n" + matrice +
+              "\n\nVectori de tați:\n" + vectorTati;
 
-        // Logica pentru reprezentarea grafică
-        if (numNodes <= 10) {
-          // Ascunde mesajul și afișează SVG-ul
+          // Logica pentru reprezentarea grafică
+          if (numNodes <= 10) {
+            // Ascunde mesajul și afișează SVG-ul
+            graphMessage.style.display = "none";
+            svg.style.display = "block";
+            drawGraph(edges, numNodes, type);
+          } else {
+            // Afișează mesajul și ascunde SVG-ul
+            graphMessage.style.display = "block";
+            svg.style.display = "none";
+            svg.innerHTML = ""; // Curăță SVG-ul
+          }
+        })
+        .catch((err) => {
+          resultDiv.textContent = "Eroare: " + err;
+          // În caz de eroare, ascunde atât mesajul cât și SVG-ul
           graphMessage.style.display = "none";
-          svg.style.display = "block";
-          drawGraph(edges, numNodes, type);
-        } else {
-          // Afișează mesajul și ascunde SVG-ul
-          graphMessage.style.display = "block";
           svg.style.display = "none";
-          svg.innerHTML = ""; // Curăță SVG-ul
-        }
-      })
-      .catch((err) => {
-        resultDiv.textContent = "Eroare: " + err;
-        // În caz de eroare, ascunde atât mesajul cât și SVG-ul
-        graphMessage.style.display = "none";
-        svg.style.display = "none";
-      });
+        });
   });
 
   function drawGraph(edges, numNodes, type) {
     svg.innerHTML = `
-      <defs>
-        <marker id="arrowhead" markerWidth="10" markerHeight="7"
-                refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
-        </marker>
-      </defs>
-    `;
+    <defs>
+      <marker id="arrowhead" …>…</marker>
+    </defs>
+  `;
 
-    const width = parseInt(svg.getAttribute("width"));
-    const height = parseInt(svg.getAttribute("height"));
+    const { width, height } = svg.getBoundingClientRect();
     const centerX = width / 2;
     const centerY = height / 2;
-    const radius = Math.min(width, height) / 2 - 50;
+    const radius  = Math.min(width, height) / 2 - 50;
 
     const coords = [];
 

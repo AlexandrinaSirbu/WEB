@@ -133,7 +133,6 @@ class GeneratorController
         echo json_encode($matrix);
     }
 
-    
     public function graph()
     {
         include VIEW . '/generators/graph.php';
