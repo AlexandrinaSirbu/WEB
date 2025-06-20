@@ -1,7 +1,7 @@
 <?php include VIEW . '/components/header.php'; ?>
 
 <div class="generator-container">
-    <h2>Generator AJAX de Grafuri</h2>
+    <h2>Generator de Grafuri</h2>
 
     <form id="generateGraphForm" class="graph-generator-form">
         <!-- TOP ROW: 3 câmpuri pe un rând -->
